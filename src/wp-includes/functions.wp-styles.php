@@ -139,7 +139,7 @@ function wp_register_style( $handle, $src, $deps = array(), $ver = false, $media
  *
  * @since 2.1.0
  *
- * @param string $handle Name of the stylesheet to be removed.
+ * @param string|string[] $handle Stylesheet handle (string) or stylehseet handles (array) to be removed.
  */
 function wp_deregister_style( $handle ) {
 	_wp_scripts_maybe_doing_it_wrong( __FUNCTION__, $handle );
@@ -158,7 +158,7 @@ function wp_deregister_style( $handle ) {
  *
  * @since 2.6.0
  *
- * @param string           $handle Name of the stylesheet. Should be unique.
+ * @param string|string[]  $handle Stylesheet handle (string) or styleheet handles (array of strings).
  * @param string           $src    Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory.
  *                                 Default empty.
  * @param string[]         $deps   Optional. An array of registered stylesheet handles this stylesheet depends on. Default empty array.
@@ -175,7 +175,7 @@ function wp_enqueue_style( $handle, $src = '', $deps = array(), $ver = false, $m
 
 	$wp_styles = wp_styles();
 
-	if ( $src ) {
+	if ( $src && is_string( $handle ) ) {
 		$_handle = explode( '?', $handle );
 		$wp_styles->add( $_handle[0], $src, $deps, $ver, $media );
 	}
@@ -190,7 +190,7 @@ function wp_enqueue_style( $handle, $src = '', $deps = array(), $ver = false, $m
  *
  * @since 3.1.0
  *
- * @param string $handle Name of the stylesheet to be removed.
+ * @param string|string[] $handle Stylesheet handle (string) or stylehseet handles (array) to be removed.
  */
 function wp_dequeue_style( $handle ) {
 	_wp_scripts_maybe_doing_it_wrong( __FUNCTION__, $handle );
